@@ -12,8 +12,8 @@ public class Router {
 
     public Router() {
         routes = new HashMap<>();
-        routes.put("/", "HTTP/1.1 200 OK\r\n\r\nWelcome to the home page!");
-        routes.put("/contact", "HTTP/1.1 200 OK\r\n\r\nThis is the about page.");
+        routes.put("/", "HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\n\r\nWelcome to the home page!");
+        routes.put("/contact", "HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\n\r\nThis is the Contact page.");
     }
 
     public HttpResponse route(HttpRequest request) {
