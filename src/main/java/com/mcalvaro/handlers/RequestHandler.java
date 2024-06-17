@@ -1,23 +1,35 @@
 package com.mcalvaro.handlers;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.Socket;
+
+import com.mcalvaro.request.HttpRequest;
+import com.mcalvaro.response.HttpResponse;
+import com.mcalvaro.router.Router;
 
 public class RequestHandler implements Runnable {
 
     private Socket clientSocket;
 
-    private final String OK_RESPONSE = "HTTP/1.1 200 OK\r\n\r\n";
+    private Router router;
 
-    public RequestHandler(Socket clientSocket) {
+    public RequestHandler(Socket clientSocket, Router router) {
         this.clientSocket = clientSocket;
+        this.router = router;
     }
 
     @Override
     public void run() {
         try {
 
-            clientSocket.getOutputStream().write(OK_RESPONSE.getBytes());
+            InputStream inputStream = clientSocket.getInputStream();
+
+            HttpRequest request = HttpRequest.parse(inputStream);
+
+            HttpResponse response = router.route(request);
+
+            clientSocket.getOutputStream().write(response.toBytes());
             clientSocket.getOutputStream().flush();
 
         } catch (IOException e) {

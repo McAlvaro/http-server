@@ -5,6 +5,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 import com.mcalvaro.handlers.RequestHandler;
+import com.mcalvaro.router.Router;
 
 public class HttpServer {
 
@@ -12,7 +13,10 @@ public class HttpServer {
 
     private ServerSocket serverSocket;
 
+    private Router router;
+
     private HttpServer() {
+        router = new Router();
     };
 
     public static synchronized HttpServer getInstance() {
@@ -38,7 +42,7 @@ public class HttpServer {
 
                 System.out.println("accepted new connection");
 
-                RequestHandler requestHandler = new RequestHandler(clientSocket);
+                RequestHandler requestHandler = new RequestHandler(clientSocket, router);
                 new Thread(requestHandler).start();
             }
 
