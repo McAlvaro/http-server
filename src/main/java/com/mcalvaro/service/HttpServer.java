@@ -15,13 +15,13 @@ public class HttpServer {
 
     private Router router;
 
-    private HttpServer() {
-        router = new Router();
+    private HttpServer(String rootDirectory) {
+        router = new Router(rootDirectory);
     };
 
-    public static synchronized HttpServer getInstance() {
+    public static synchronized HttpServer getInstance(String rootDirectory) {
         if (instance == null) {
-            instance = new HttpServer();
+            instance = new HttpServer(rootDirectory);
         }
 
         return instance;
