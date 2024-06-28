@@ -1,0 +1,9 @@
+routes:
+  "/":
+    response: "HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\n\r\nWelcome to the home page!"
+  "/contact":
+    response: "HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\n\r\nThis is the Contact page."
+  "/about":
+    response: "HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\n\r\nThis is the About page."
+  "/help":
+    response: "HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\n\r\nThis is the Help page."

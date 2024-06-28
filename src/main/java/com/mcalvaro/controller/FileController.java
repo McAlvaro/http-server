@@ -8,7 +8,7 @@ import java.nio.file.Files;
 import com.mcalvaro.request.HttpRequest;
 import com.mcalvaro.response.HttpResponse;
 
-public class FileController {
+public class FileController implements Controller {
 
     private String rootDirectory;
 
@@ -17,7 +17,8 @@ public class FileController {
         this.rootDirectory = rootDirectory;
     }
 
-    public HttpResponse handleFileRequest(HttpRequest request) {
+    @Override
+    public HttpResponse handleRequest(HttpRequest request) {
 
         String filePath = rootDirectory + request.getPath().substring("/files/".length());
 

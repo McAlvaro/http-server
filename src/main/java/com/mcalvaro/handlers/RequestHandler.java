@@ -27,6 +27,9 @@ public class RequestHandler implements Runnable {
 
             HttpRequest request = HttpRequest.parse(inputStream);
 
+            String userAgent = request.getHeader("user-agent");
+            System.out.println("User-Agent: " + userAgent);
+
             HttpResponse response = router.route(request);
 
             clientSocket.getOutputStream().write(response.toBytes());
